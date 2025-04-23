@@ -1,0 +1,44 @@
+# Copyright (c) 2025-present, Royal Bank of Canada.
+# All rights reserved.
+#
+# This source code is licensed under the license found in the
+# LICENSE file in the root directory of this source tree.
+
+RNG_SEED: 1
+DATASET:
+  NAME: TINYIMAGENET
+  ROOT_DIR: 'data/tiny-imagenet-200'
+  VAL_RATIO: 0.025
+MODEL:
+  TYPE: deit_small_patch16_224
+  NUM_CLASSES: 200
+  LOSS_FUN: label_smoothing
+  CHECKPOINT_PATH: 'deep-al/checkpoints/dino_deitsmall16_pretrain.pth'
+OPTIM:
+  TYPE: 'sgd'
+  BASE_LR: 0.005
+  LR_POLICY: cos
+  LR_MULT: 0.1
+  MAX_EPOCH: 1000 #1000
+  MOMENTUM: 0.9
+  NESTEROV: True
+  WEIGHT_DECAY: 0.0001
+  GAMMA: 0.1
+  MIN_LR: 1e-5
+TRAIN:
+  SPLIT: train
+  BATCH_SIZE: 256
+  IM_SIZE: 224
+  EVAL_PERIOD: 50
+TEST:
+  SPLIT: test
+  BATCH_SIZE: 256
+  IM_SIZE: 224
+DATA_LOADER:
+  NUM_WORKERS: 4
+CUDNN:
+  BENCHMARK: True
+ACTIVE_LEARNING:
+  INIT_L_RATIO: 0.
+  MAX_ITER: 10
+  FINE_TUNE: False

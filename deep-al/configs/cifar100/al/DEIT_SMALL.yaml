@@ -1,0 +1,44 @@
+# Copyright (c) 2025-present, Royal Bank of Canada.
+# All rights reserved.
+#
+# This source code is licensed under the license found in the
+# LICENSE file in the root directory of this source tree.
+
+RNG_SEED: 1
+DATASET:
+  NAME: CIFAR100
+  ROOT_DIR: './data'
+  VAL_RATIO: 0.1
+MODEL:
+  TYPE: deit_small_patch16_224
+  NUM_CLASSES: 100
+  LOSS_FUN: ce
+  CHECKPOINT_PATH: 'deep-al/checkpoints/dino_deitsmall16_pretrain.pth'
+OPTIM:
+  TYPE: 'adam'
+  BASE_LR: 0.00001
+  LR_POLICY: none
+  LR_MULT: 0.1
+  MAX_EPOCH: 200
+  MOMENTUM: 0.9
+  NESTEROV: False
+  WEIGHT_DECAY: 0.0001
+  GAMMA: 0.1
+  MIN_LR: 1e-5
+TRAIN:
+  SPLIT: train
+  BATCH_SIZE: 64
+  IM_SIZE: 224
+  EVAL_PERIOD: 5
+TEST:
+  SPLIT: test
+  BATCH_SIZE: 64
+  IM_SIZE: 224
+DATA_LOADER:
+  NUM_WORKERS: 4
+CUDNN:
+  BENCHMARK: True
+ACTIVE_LEARNING:
+  INIT_L_RATIO: 0.
+  MAX_ITER: 10
+  FINE_TUNE: False

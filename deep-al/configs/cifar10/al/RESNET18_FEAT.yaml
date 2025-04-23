@@ -1,0 +1,43 @@
+# Copyright (c) 2025-present, Royal Bank of Canada.
+# All rights reserved.
+#
+# This source code is licensed under the license found in the
+# LICENSE file in the root directory of this source tree.
+
+RNG_SEED: 1
+DATASET:
+  NAME: CIFAR10
+  ROOT_DIR: './data'
+  VAL_RATIO: 0.1
+  AUG_METHOD: 'hflip'
+MODEL:
+  TYPE: resnet18
+  NUM_CLASSES: 10
+  LINEAR_FROM_FEATURES: True
+OPTIM:
+  TYPE: 'sgd'
+  BASE_LR: 0.025
+  LR_POLICY: cos
+  LR_MULT: 0.1
+  MAX_EPOCH: 200
+  MOMENTUM: 0.9
+  NESTEROV: True
+  WEIGHT_DECAY: 0.0003
+  GAMMA: 0.1
+TRAIN:
+  SPLIT: train
+  BATCH_SIZE: 100
+  IM_SIZE: 32
+  EVAL_PERIOD: 2
+TEST:
+  SPLIT: test
+  BATCH_SIZE: 200
+  IM_SIZE: 32
+DATA_LOADER:
+  NUM_WORKERS: 4
+CUDNN:
+  BENCHMARK: True
+ACTIVE_LEARNING:
+  INIT_L_RATIO: 0.
+  MAX_ITER: 10
+  FINE_TUNE: False

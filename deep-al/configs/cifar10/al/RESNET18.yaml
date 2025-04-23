@@ -1,0 +1,45 @@
+# Code is originally from the Typiclust (https://arxiv.org/abs/2202.02794) and ProbCover (https://arxiv.org/abs/2205.11320) implementation
+# from https://github.com/avihu111/TypiClust by Avihu Dekel and Guy Hacohen which is licensed under MIT license
+# You may obtain a copy of the License at
+#
+# https://github.com/avihu111/TypiClust/blob/main/LICENSE
+#
+####################################################################################
+
+RNG_SEED: 1
+DATASET:
+  NAME: CIFAR10
+  ROOT_DIR: "./data"
+  VAL_RATIO: 0.1
+  AUG_METHOD: "hflip"
+MODEL:
+  TYPE: resnet18
+  NUM_CLASSES: 10
+  CHECKPOINT_PATH: "/home/whbae/low_budget_al/deep-al/checkpoints/resnet18-5c106cde.pth"
+OPTIM:
+  TYPE: "sgd"
+  BASE_LR: 0.025
+  LR_POLICY: cos
+  LR_MULT: 0.1
+  MAX_EPOCH: 200
+  MOMENTUM: 0.9
+  NESTEROV: True
+  WEIGHT_DECAY: 0.0003
+  GAMMA: 0.1
+TRAIN:
+  SPLIT: train
+  BATCH_SIZE: 100
+  IM_SIZE: 32
+  EVAL_PERIOD: 2
+TEST:
+  SPLIT: test
+  BATCH_SIZE: 200
+  IM_SIZE: 32
+DATA_LOADER:
+  NUM_WORKERS: 4
+CUDNN:
+  BENCHMARK: True
+ACTIVE_LEARNING:
+  INIT_L_RATIO: 0.
+  MAX_ITER: 10
+  FINE_TUNE: False
